@@ -1,0 +1,23 @@
+{
+    "projectName": "Personalised Diabetes Assistant",
+    "description": "A smart solution for maintaining optimal sugar levels using a web-app that integrates with a smartwatch. The app provides recommendations on insulin dose and calories one needs to burn to maintain optimal blood glucose control.",
+    "problemItSolves": "Achieving optimal blood sugar requires multiple hospital visits which can be expensive and inconvinient. Undercontrolled blood glucose levels are a significant cause of complications arising out of diabetes and contribute to cost of care. By creating personalised reccommendation for insulin dose and physical activity, the web-app intends to enable self-care and improve overall outcomes for people with diabetes. ",
+    "repoURL": "https://github.com/sumitrathore1313/Personalised-Diabetes-Assistant.git",
+    "teamMembers": {
+        "1": {
+            "name": "Sumit Rathore",
+            "email": "sumitrathore1313@gmail.com",
+            "telegramUsername": "@sumitrathore1313"
+        },
+        "2": {
+            "name": "Rahul Gaiba",
+            "email": "rahul350rg@gmail.com",
+            "telegramUsername": "@rahulgaiba"
+        },
+        "3": {
+            "name": "Aditya Rustagi",
+            "email": "rustagiadi95@gmail.com",
+            "telegramUsername": "@rustagiadi"
+        }
+    }
+}
