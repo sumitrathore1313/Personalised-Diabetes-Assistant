@@ -14,25 +14,29 @@ def dashboard_index(request):
         gluc = Glucose.objects.all().latest('datetime')
         data = {"glucose": gluc.glucose, "sleep": gluc.sleep, "weight": gluc.weight,
                 "excersize": gluc.duration_of_exercise}
-        insulin = pred(getVector(data))
-        calories = insulin // 2 + 5
+        pred_glucose = pred(getVector(data))
+        current_glucose = gluc.glucose
+        insulin = current_glucose * gluc.weight // 2000
+        calories = current_glucose * gluc.weight // 50
         current_glucose = gluc.glucose
     else:
         current_glucose = ""
-    context_dict = {'form':form, 'log':top_n_rec, 'insulin':insulin, 'calories':calories, 'gluc':current_glucose}
+        pred_glucose = ""
+    context_dict = {'form':form, 'log':top_n_rec, 'insulin':insulin, 'calories':calories, 'gluc':current_glucose, "pred_glucose": pred_glucose}
     if request.method == "POST" :
         form = Entry(request.POST)
 
         if form.is_valid() :
             gluc = form.save(commit=True)
-            print(gluc)
             data = {"glucose": gluc.glucose, "sleep": gluc.sleep, "weight": gluc.weight, "excersize": gluc.duration_of_exercise}
-            insulin = pred(getVector(data))
-            calories = insulin//2 + 5
+            pred_glucose = pred(getVector(data))
+            current_glucose = gluc.glucose
+            insulin = current_glucose * gluc.weight // 2000
+            calories = current_glucose * gluc.weight // 50
             current_glucose = gluc.glucose
             # pred_ins, pred_cal = useNeuralNet(latest_entry)
     
-    return render(request, 'diabetes_tracker/dashboard.html', {'form':form, 'log':top_n_rec, 'insulin':insulin, 'calories':calories, 'gluc':current_glucose})
+    return render(request, 'diabetes_tracker/dashboard.html', {'form':form, 'log':top_n_rec, 'insulin':insulin, 'calories':calories, 'gluc':current_glucose, "pred_glucose": pred_glucose})
 
 
 
