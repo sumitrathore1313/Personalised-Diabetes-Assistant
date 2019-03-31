@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block head_block %}
+        <title>Diabetic Questions</title>
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock %}
+    {% block bodyblock %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6" style="margin: 100px">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addOption">Add For Current Date</button>
+                    <div id="addOption" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Add an entry for current inputs</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <br>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <input type="submit" class="btn btn-primary" value="Add Entry">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <center>
+                                <h1>{{ insulin }}</h1>
+                            </center>
+                            <p>The insulin intake for the next day should be</p><br>
+                        </div>
+                        <div class="col-sm-4">
+                            <center>
+                                <!-- Show the current predictions of calories to be burned -->
+                                <h1>{{ calories }}</h1>
+                            </center>
+                        <p>The calories you need to burn tomorrow are :</p><br>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <center>
+                                    <h1>{{ gluc }}</h1>
+                            </center>
+                        <p>The current glucose status is</p><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <center>
+                        <table class="table table-dark">
+                          <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Glucose</th>
+                                <th>sleep</th>
+                                <th>weight</th>
+                                <th>duration_of_exercise</th>
+                                <th>type_of_exercise</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for items in log %}
+                            <tr>
+                              <th scope="row">{{items.id}}</th>
+                              <td>{{items.glucose}}</td>
+                              <td>{{items.sleep}}</td>
+                              <td>{{items.weight}}</td>
+                              <td>{{items.duration_of_exercise}}</td>
+                              <td>{{items.type_of_exercise}}</td>
+                            </tr>
+                          {% endfor %}
+
+                          </tbody>
+                        </table>
+                    </center>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

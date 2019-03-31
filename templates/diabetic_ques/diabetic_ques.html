@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block head_block %}
+        <title>Diabetic Questions</title>
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {% endblock %}
+    {% block bodyblock %}
+    <div class="container">
+        <div class="row" style="height:150px;"></div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <center>
+                    <h3 style="color:green">Please Select all that is true</h3>
+                    <br>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ forms2.as_p }}
+                        <input type="submit" class="btn btn-success" value="Check your preliminaries for Diabetes">
+                    </form>
+                </center>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <div class="row"></div>
+    </div>
+    {% endblock %}
